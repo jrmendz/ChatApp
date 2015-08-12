@@ -1,7 +1,5 @@
 # ChatApp
 
-#Welcome to txtConsole! make your business numbers SMART
-
 Packages Required:
 ---------
 * accounts-password      1.1.1  Password support for accounts
