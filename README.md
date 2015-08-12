@@ -1,5 +1,4 @@
 # ChatApp
-<<<<<<< HEAD
 
 Packages Required:
 ---------
@@ -16,6 +15,3 @@ Packages Required:
 * meteorhacks:npm        1.4.0  Use npm modules with your Meteor App
 * momentjs:moment        2.10.6  Moment.js (official): parse, validate, ma...
 * mizzao:user-status     0.6.5  User connection and idle state tracking fo...
-
-=======
->>>>>>> origin/master
