@@ -1,0 +1,42 @@
+<template name="poundcode">
+    <div class="w-clearfix central">
+        <div class="row" style="padding: 30px">
+			<div class="panel">
+				<div class="panel-heading">
+	            	<h3>Pound Codes <button type="button" class="btn btn-success add-poundcode"><span class="glyphicon glyphicon-plus"></span></button></h3>
+				</div>
+				<div class="panel-body paddingtop10">
+		            <form id="poundcodeForm">
+		                <div class="row">
+		                    <div class="col-md-2"><label>Code</label></div>
+		                    <div class="col-md-6"><label>Message</label></div>
+		                    <div class="col-md-3"><label>Expiration</label></div>
+		                    <div class="col-md-1">&nbsp;</div>
+		                </div>
+		                {{#each addIndexKey poundcodes}}
+		                <div class="row">
+		                    <div class="col-md-2">
+		                        <input type="text" value="{{value.code}}" class="form-control code" data-idx="{{indexKey}}" name="code{{indexKey}}" id="code{{indexKey}}">
+		                    </div>
+		                    <div class="col-md-6">
+		                        <input type="text" value="{{value.message}}" class="form-control message" data-idx="{{indexKey}}" name="message{{indexKey}}" id="message{{indexKey}}">
+		                    </div>
+		                    <div class="col-md-3">
+		                        <input type="text" value="{{formatDate value.expiration}}" class="form-control datepicker expiration" data-idx="{{indexKey}}" name="expiration{{indexKey}}" id="expiration{{indexKey}}">
+		                    </div>
+		                    <div class="col-md-1">
+		                        <button type="button" class="btn btn-danger remove-poundcode" data-idx="{{indexKey}}"><span class="glyphicon glyphicon-remove"></span></button>
+		                    </div>
+		                </div><br>
+		                {{/each}}
+		                <br>
+		                <div class="col-md-12 text-right">
+		                    <button class="btn btn-primary" type="submit">Save</button>
+		                    <button class="btn btn-default cancel-poundcode" type="button">Cancel</button>
+		                </div>
+		            </form>
+        		</div>
+        	</div>
+		</div>
+    </div>
+</template>

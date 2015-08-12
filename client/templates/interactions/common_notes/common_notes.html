@@ -1,0 +1,62 @@
+<template name="commonNotes">
+    <div class="modal fade" id="commonNotesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document" style="height: 100%; width: 70%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>
+                                <span class="glyphicon glyphicon-list-alt"></span> 
+                                List 
+                                <button class="btn btn-success pull-right add-note"><span class="glyphicon glyphicon-plus"></span></button>
+                            </h3>
+                            <div class="list-group">
+                                {{#each addIndexKey notesList}}
+                                    <div class="list-group-item">
+                                        <h5 class="text-center">
+                                            {{value.note}}
+                                            <button class="btn btn-primary pull-right view-note" 
+                                                data-idx="{{indexKey}}"
+                                                data-note="{{value.note}}"
+                                                data-createdby="{{value.createdBy}}"
+                                                data-createdat="{{value.createdAt}}"
+                                                data-deleted="{{value.deleted}}"
+                                                data-deletedby="{{value.deletedBy}}"
+                                                data-deletedat="{{value.deletedAt}}">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                            <button style="display: {{isEqual value.deleted '1' 'none' 'block'}}" class="btn btn-danger pull-right remove-note" data-idx="{{indexKey}}" data-idtimestamp="{{value.interactionId}}{{value.createdAt}}"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </h5>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>{{{commonNotesMode}}} Note</h3>
+                            <form id="commonNotesForm">
+                                <div class="form-group">
+                                    <label for="name">Note</label>
+                                    <textarea name="note" id="note" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group create-info" style="display: none">
+                                    <strong>Created: </strong><small id="created"></small>
+                                </div>
+                                <div class="form-group delete-info" style="display: none">
+                                    <strong>Deleted: </strong><small id="deleted"></small>
+                                </div>
+                                <div class="form-group pull-right action-buttons">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-default notes-cancel" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

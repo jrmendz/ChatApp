@@ -1,0 +1,33 @@
+<template name="attachment">
+<div class="pull-right">
+    <p  class="attachment-icons" style="display: none; color: #333">
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-image"><span class="glyphicon glyphicon-picture"></span></button>
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-video"><span class="glyphicon glyphicon-facetime-video"></span></button>
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-audio"><span class="glyphicon glyphicon-music"></span></button>
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-other"><span class="glyphicon glyphicon-file"></span></button>
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-map"><span class="glyphicon glyphicon-map-marker"></span></button>
+        <button {{attachmentDisabled}} data-toggle="modal" data-target="#dropzoneModal" class="btn btn-xs attach-contact"><span class="glyphicon glyphicon-user"></span></button>
+    </p>&nbsp;
+    <button class="pull-right btn btn-xs attachment-btn"><span class="fa fa-paperclip"></span></button>
+</div>
+
+<div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="title"></h4>
+            </div>
+            <div class="modal-body text-center">
+                <img src="#" style="max-width: 500px;display: none;"/>
+                <video width="500" controls style="display: none;">
+                    Your browser does not support HTML5 video.
+                </video>
+                <audio controls style="display: none;">
+                    Your browser does not support the audio element.
+                </audio> 
+            </div>
+        </div>
+    </div>
+</div>
+</template>

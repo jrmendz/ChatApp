@@ -1,0 +1,20 @@
+<template name="login">
+    <div class="w-form" id="login-form">
+        <h2 class="text-center" style="margin-top: 200px; margin-bottom: -200px">TxtConsole<br><small>for business agents only</small></h2><hr>
+        <form class="login-main-form" id="wf-form-login" name="wf-form-login" data-name="login">
+            <input class="w-input login-input" id="login-username" type="text" placeholder="Enter username" name="loginUsername" data-name="login-username" required="required">
+            <input class="w-input login-input" id="login-password" type="password" placeholder="Enter your password" name="loginPassword" data-name="Password" required="required">
+            <input class="w-button login-button" type="submit" value="Submit" data-wait="Please wait...">
+        </form>
+    </div>
+</template>
+
+
+<template name="businessNumberLogin">
+    <form class="login-main-form" id="mobile-login-form" name="mobile-login-form" data-name="Mobile Login Form">
+        <label class="login-input-lable" for="phone-number-main">Enter phone number:</label>
+        <input class="w-input login-input" id="phone-number-main" type="text" placeholder="( xxx ) xxx - xxxx " name="phoneNumber" data-name="phone-number-main" required="required" autofocus="autofocus">
+<!--        <label class="login-forgot" for="email">Forgot phone number?</label>-->
+        <input class="w-button login-button" type="submit" value="Access TEXT Console" data-wait="Please wait...">
+    </form>
+</template>

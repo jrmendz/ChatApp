@@ -1,0 +1,70 @@
+<template name="inboxSummary">
+{{#if consumers type}}
+	{{#each consumers type}}
+	<li class="media">
+		<a href="#" class="view-consumer consumer-no"
+			data-name="{{name}}"
+			data-company="{{company}}"
+			data-number="{{number}}"
+			data-blocked="{{blocked}}"
+			data-optedout="{{optedOut}}"
+			data-optedby="{{optedBy}}"
+			data-optedtimestamp="{{optedTimestamp}}"
+			data-type="{{type}}"
+			data-groupid="{{groupId}}">
+			<div class="media-left">
+				<img class="media-object img-circle" src="/images/person.PNG" alt="">
+			</div>
+			<div class="media-body">
+				{{#if isEqual type 'group'}}
+				<h4 class="media-heading sm-mname has-tooltip" data-toggle="tooltip" data-placement="bottom" data-title="{{name}}">{{sName}}</h4><br/>
+				<span class="smi-ophone has-tooltip" data-toggle="tooltip" data-placement="bottom" data-title="{{number}}">{{sNumber}}</span>
+				{{else}}
+				<h4 class="media-heading sm-mname">{{name}}</h4><br/>
+				<span><i class="fa fa-phone"></i>&nbsp;{{number}}</span>
+				{{/if}}
+				<br/>
+				{{#if company}}
+				<span><i class="fa fa-building-o"></i>&nbsp;{{company}}</span>
+				<br/>
+				{{/if}}
+				<span><i class="fa fa-comment-o"></i>&nbsp;{{lastMsg}}</span>
+				<br/>
+				<span><i class="fa fa-clock-o"></i>&nbsp;{{timeFromNow lastTimestamp}}</span><br/>
+                {{#unless isEqual type 'invite'}}<span>{{unreadCount}}</span>{{/unless}}
+				<br/>
+			</div>
+			{{#if currentConsumer number}}
+			<div class="msg-menu" style="padding: 1px">
+				{{#if isEqual type 'invite'}}
+				<button class="btn btn-success btn-xs accept-transfer"><span class="glyphicon glyphicon-ok"></span></button>
+				<button class="btn btn-danger btn-xs reject-transfer"><span class="glyphicon glyphicon-remove"></span></button>
+				{{else}}
+					{{#if isEqual type 'solo'}}
+						{{#if isEqual blocked '1'}}
+				<button class="btn btn-danger btn-xs unblock"><span class="fa fa-lock"></span></button>
+						{{else}}
+				<button class="btn btn-success btn-xs block"><span class="fa fa-unlock"></span></button>
+						{{/if}}
+				<button class="btn btn-{{isEqual optedOut '1' 'danger' 'success'}} btn-xs {{isEqual optedOut '1' 'unoptout' 'optout'}}" data-numberid="{{number}}"><span class="fa fa-send"></span></button>
+
+				<button class="btn btn-default btn-xs note-consumer" data-toggle="modal" data-target="#commonNotesModal"><span class="glyphicon glyphicon-list-alt"></span></button>
+				<button class="btn btn-default btn-xs transfer-consumer" data-toggle="modal" data-target="#transferClaimModal"><span class="glyphicon glyphicon-transfer"></span></button>
+				<button class="btn btn-default btn-xs event-scheduler" data-toggle="modal" data-target="#eventSchedulerModal"><span class="glyphicon glyphicon-calendar"></span></button>
+				<button class="btn btn-default btn-xs group-conversation" data-toggle="modal" data-target="#groupConversationModal"><span class="fa fa-group"></span></button>
+				<button class="btn btn-default btn-xs info-consumer" data-toggle="modal" data-target="#consumerInfoModal"><span class="glyphicon glyphicon-info-sign"></span></button>
+				<button class="btn btn-{{isEqual claimed '1' 'danger' 'success'}} btn-xs {{isEqual claimed '1' 'unclaim' 'claim'}}-consumer"><span class="glyphicon glyphicon-off"></span></button>
+				<button class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-chevron-right"></span></button>
+					{{else}}
+				<button class="btn btn-default btn-xs group-conversation" data-groupid="{{groupId}}" data-toggle="modal" data-target="#groupConversationModal"><span class="fa fa-group"></span></button>
+		   		<button class="btn btn-{{isEqual active '1' 'danger' 'success'}} btn-xs {{isEqual active '1' 'deactivate' 'activate'}}-group"><span class="glyphicon glyphicon-ban-circle"></span></button>
+					{{/if}}
+				{{/if}}
+			</div>
+			{{/if}}
+		</a>
+	</li>
+	{{/each}}
+	{{#if isEqual type 'claimed'}}<div style="display: block; margin-left: 45%" id="loading-consumers"><img style="height: 25px; width: 25px" src="/images/spinner.gif"></div>{{/if}}
+{{/if}}
+</template>

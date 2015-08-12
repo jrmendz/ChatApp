@@ -1,0 +1,61 @@
+<template name="interactions">
+    <div class="w-clearfix central">
+		<div class="summary leftpanel" style="width:270px !important;">
+			<div class="tab-content">
+				<div class="tab-pane active">
+					<br/>
+					<div class="input-group input-search-contact">
+						<input type="text" id="search" name="search" class="form-control search-input" placeholder="Type a keyword...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+						</span>
+          				<div class="w-form-done"></div>
+        				<div class="w-form-fail"></div>
+					</div>
+					<h5 class="sidebar-title">Customers</h5>
+					<div class="panel-group" id="customers">
+						<div class="panel panel-inverse">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#customers" href="#claimed" aria-expanded="true" class="">
+									Claimed
+									</a>
+								</h4>
+							</div>
+							<div id="claimed" class="panel-collapse collapse in" aria-expanded="true">
+								<div class="panel-body" style="padding:0px;">
+									<ul class="media-list media-list-contacts">
+									{{>inboxSummary type='claimed' icon='success' title='Claimed' divId='claimed-div'}}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-inverse">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" class="collapsed" data-parent="#customers" href="#unclaimed" aria-expanded="false">
+									Unclaimed
+									</a>
+								</h4>
+							</div>
+							<div id="unclaimed" class="panel-collapse collapse" aria-expanded="false">
+								<div class="panel-body" style="padding:0px;">
+									<ul class="media-list media-list-contacts">
+									{{>inboxSummary type='unclaimed' icon='success' title='Claimed' divId='claimed-div'}}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    {{>messageDetails}}
+  </div>
+	{{>commonNotes}}
+	{{>forwardMessage}}
+	{{>transferClaim}}
+	{{>eventScheduler}}
+	{{>groupConversation}}
+	{{>consumerInfo}}
+</template>

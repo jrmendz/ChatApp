@@ -1,0 +1,17 @@
+<template name="settings">
+    <div class="w-clearfix central">
+		<div class="row people-list">
+			<div class="people-options clearfix">
+				<span class="people-count pull-left"><strong>Settings</strong></span>
+				<div class="btn-toolbar pull-right">
+					<button type="button" class="btn btn-success btn-quirk" data-toggle="modal" data-target="#defaultsModal">Default Settings</button>
+					<button type="button" class="btn btn-success btn-quirk" data-toggle="modal" data-target="#autoResponderSettingsModal">Auto Responder</button>
+					<button type="button" class="btn btn-success btn-quirk" data-toggle="modal" data-target="#eventSchedulerSettingsModal">Event Scheduler</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    {{>eventscheduler}}
+    {{>autorespond}}
+    {{>defaults}}
+</template>

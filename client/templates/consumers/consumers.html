@@ -1,0 +1,368 @@
+<template name="consumers">
+    <div class="w-clearfix central">
+        <div class="col-sm-12">
+            <div class="col-sm-3">
+	    		<div class="summary leftpanel">
+					<div class="tab-content">
+						<div class="tab-pane active" style="overflow: auto;height: 550px;">
+
+							<h5 class="sidebar-title">Customers</h5>
+							<ul class="media-list media-list-contacts">
+		                	{{#each getConsumers}}
+								<li class="media">
+									<a href="#" class="view-consumer consumer-no" data-number="{{mobile_number}}" data-name="{{name}}" data-company="{{company}}">
+										<div class="media-left">
+											<img class="media-object img-circle" src="/images/person.PNG" alt="">
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">{{profile}}</h4>
+											<span><i class="fa fa-mobile"></i>&nbsp;{{displayMobileNumber mobile_number country}}</span>
+										</div>
+									</a>
+								</li>
+		                	{{/each}}
+							</ul>
+		            	</div>
+	            	</div>
+            	</div>
+				<!--<strong>{{init}}Consumers ({{count}}):</strong>
+                <div class="consumers-list">
+                {{#each getConsumers}}
+                    <div>
+						<a href="" class="consumer-no" data-number="{{mobile_number}}">
+							<strong>&diams;&nbsp;{{profile}}</strong>
+							<span>{{mobile_number}}</span>
+						</a>
+					</div>
+                {{/each}}
+                </div>-->
+            </div>
+            <!--end of col-sm-4-->
+            <div class="col-sm-9">
+                <br>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary addConsumer" id="addConsumer">Add Consumer Details</button>
+                    <button type="button" class="btn btn-primary editConsumer" id="editConsumer" disabled="true">Edit Consumer Details</button>
+                    <button type="button" class="btn btn-primary importConsumer" id="importConsumer">Import CSV file</button>
+                </div>
+                {{#if isAdd}}
+                    {{>add}}
+                {{/if}}
+                {{#if isView}}
+                    {{>viewer}}
+                {{/if}}
+                {{#if isEdit}}
+                    {{#each getInfo}}
+                    {{>edit}}
+                    {{/each}}
+                {{/if}}
+                {{#if isImport}}
+                    {{>importHandler}}
+                {{/if}}
+            </div>
+            <!--end of col-sm-8-->
+        </div>
+    </div>
+	{{init}}
+</template>
+
+
+<template name="add">
+	<fieldset>
+		<legend>Add Consumer</legend>
+		<form action="" class="form-horizontal" id="addForm">
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="mobile-no">Mobile number <small style="margin-left: 150px"><input type="checkbox" name="isIntl" class="is-intl"/> International?</small></label>
+		                <input class="form-control" name="mobileNo" id="mobile-no" placeholder="Mobile #" required="" value="" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <input type="checkbox" name="is_employee" value="1" class="add-is-emp">
+		                &nbsp;Employee?
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="fname">First name</label>
+		                <input class="form-control" name="fname" id="fname" placeholder="First name" required="" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <label for="lname">Last name</label>
+		                <input class="form-control" name="lname" id="lname" placeholder="Last name" required="" type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-7">
+		                <label for="company">Company</label>
+		                <input class="form-control" name="company" id="company" placeholder="Company" type="text"/>
+		            </div>
+		            <div class="col-sm-5">
+		                <label for="company">Account No.</label>
+		                <input class="form-control" name="accno" id="accno" placeholder="Account No." type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-8">
+						<label for="company">Address</label>
+		                <input class="form-control" name="address" id="address" placeholder="Address" type="text"/>
+					</div>
+		            <div class="col-sm-4">
+						{{> language}}
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						{{>countries}}
+  					</div>
+		            <div class="col-sm-3">
+						<label for="company">State</label>
+		                <input class="form-control" name="state" id="state" placeholder="State" type="text"/>
+					</div>
+		            <div class="col-sm-3">
+						<label for="company">City</label>
+		                <input class="form-control" name="city" id="city" placeholder="City" type="text"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						<label for="company">Email</label>
+		                <input class="form-control" name="email" id="email" placeholder="Email" type="text"/>
+					</div>
+		            <div class="col-sm-6">
+						<label for="company">Link</label>
+		                <input class="form-control" name="link" id="link" placeholder="Link" type="text"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+
+				</div>
+			</div>
+		    <div class="modal-footer">
+		        <div class="btn-group">
+		            <button type="reset" class="btn btn-default" id="clear">Clear</button>
+		            <button type="submit" class="btn btn-primary" id="save">Add</button>
+		        </div>
+		    </div>
+		    <!-- end of modal-footer -->
+		</form>
+	</fieldset>
+</template>
+
+<template name="viewer">
+	{{#each info}}
+	<fieldset>
+		<legend>View Consumer</legend>
+		<form action="" class="form-horizontal" id="addForm">
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="mobile-no">Mobile number</label>
+		                <input readonly class="form-control" value="{{displayMobileNumber mobile_number countryCode}}" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <input type="checkbox" name="is_employee" value="1" {{isEqual isEmployee '1' 'checked' ':none'}} disabled>
+		                &nbsp;Employee?
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="fname">First name</label>
+		                <input readonly class="form-control" value="{{first}}" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <label for="lname">Last name</label>
+		                <input readonly class="form-control" value="{{last}}" type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-7">
+		                <label for="company">Company</label>
+		                <input readonly class="form-control" value="{{company}}" type="text"/>
+		            </div>
+		            <div class="col-sm-5">
+		                <label for="company">Account No.</label>
+		                <input readonly class="form-control" value="{{account_no}}" type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-8">
+						<label for="company">Address</label>
+		                <input readonly class="form-control" value="{{address}}" type="text"/>
+					</div>
+		            <div class="col-sm-4">
+						<label>Language</label>
+						<input readonly  type="text" class="form-control"  value="{{language}}"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						<label>Country</label>
+		                <input readonly class="form-control" value="{{country}}" type="text"/>
+  					</div>
+		            <div class="col-sm-3">
+						<label for="company">State</label>
+		                <input readonly class="form-control" value="{{state}}" type="text"/>
+					</div>
+		            <div class="col-sm-3">
+						<label for="company">City</label>
+		                <input readonly class="form-control"  value="{{city}}" type="text" style="font-weight: bold"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						<label for="company">Email</label>
+		                <input readonly class="form-control" value="{{email}}" type="text"/>
+					</div>
+		            <div class="col-sm-6">
+						<label for="company">Link</label>
+		                <input readonly class="form-control" value="{{link}}" type="text"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+
+				</div>
+			</div>
+		     end of modal-footer 
+		</form>
+	</fieldset>
+	{{/each}}
+</template>
+
+<template name="edit">
+	{{#each info}}
+	<fieldset>
+		<legend>Edit Consumer</legend>
+		<form action="" class="form-horizontal" id="editForm">
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="mobile-no">Mobile number</label>
+		                <input readonly class="form-control" name="mobileNo" id="mobile-no" placeholder="Mobile #" required="" value="{{displayMobileNumber mobile_number sessionCountryCode}}" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <input type="checkbox" name="is_employee" class="edit-is-emp" value="1" {{isEqual isEmployee '1' 'checked' ':none'}}>
+		                &nbsp;Employee?
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+		                <label for="fname">First name</label>
+		                <input value={{first}} class="form-control" name="fname" id="fname" placeholder="First name" required="" type="text"/>
+		            </div>
+		            <div class="col-sm-6">
+		                <label for="lname">Last name</label>
+		                <input value={{last}} class="form-control" name="lname" id="lname" placeholder="Last name" required="" type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-7">
+		                <label for="company">Company</label>
+		                <input value={{company}} class="form-control" name="company" id="company" placeholder="Company" type="text"/>
+		            </div>
+		            <div class="col-sm-5">
+		                <label for="company">Account No.</label>
+		                <input value={{account_no}} class="form-control" name="accno" id="accno" placeholder="Account No." type="text"/>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-8">
+						<label for="company">Address</label>
+		                <input value={{address}} class="form-control" name="address" id="address" placeholder="Address" type="text"/>
+					</div>
+		            <div class="col-sm-4">
+						{{> language}}
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						{{>countries}}
+  					</div>
+		            <div class="col-sm-3">
+						<label for="company">State</label>
+		                <input  value={{state}} class="form-control" name="state" id="state" placeholder="State" type="text"/>
+					</div>
+		            <div class="col-sm-3">
+						<label for="company">City</label>
+		                <input value={{city}} class="form-control" name="city" id="city" placeholder="City" type="text"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+		            <div class="col-sm-6">
+						<label for="company">Email</label>
+		                <input value={{email}} class="form-control" name="email" id="email" placeholder="Email" type="text"/>
+					</div>
+		            <div class="col-sm-6">
+						<label for="company">Link</label>
+		                <input value={{link}} class="form-control" name="link" id="link" placeholder="Link" type="text"/>
+					</div>
+				</div>
+			</div>
+		    <div class="form-group">
+		        <div class="col-sm-12">
+
+				</div>
+			</div>
+		    <div class="modal-footer">
+		        <div class="btn-group">
+		            <button type="submit" class="btn btn-primary" id="editForm">Update</button>
+		            <button type="button" class="btn"  id="cancelEdit">Cancel</button>
+		        </div>
+		    </div>
+		    <!-- end of modal-footer -->
+		</form>
+	</fieldset>
+	{{/each}}
+</template>
+
+<template name="language">
+	<label for="company">Language</label>
+    <select class="form-control" id="language" name="language" selected="{{country}}">
+		{{#each languages}}
+		<option value="{{code}}" {{isSelected defaultLanguage code}}>{{name}}</option>
+		{{/each}}
+	</select>
+</template>
+
+<template name="countries">
+    <label for="countries">Country</label>
+    <select class="form-control" id="countries" name="countries" selected="{{country}}">
+		{{#each countries}}
+        <option value="{{code}}" {{isSelected defaultCountry code}}>{{name}}</option>
+		{{/each}}
+    </select>
+</template>

@@ -1,0 +1,39 @@
+<template name="autorespond">
+   <div class="modal fade" id="autoResponderSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-lg">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title">Auto Responder</h4>
+                </div>
+                <form id="autorespondForm">
+                    <div class="modal-body text-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Business Days/Hours</h4>
+                                {{#each days}}
+                                <div class="form-group">
+                                    <div class="col-md-1"><input type="checkbox" name="{{day}}Open" id="{{day}}-open-day" class="form-control check-box" data-day="{{day}}" value="1" {{checked open}}/></div> 
+                                    <div class="col-md-3"><h4>{{capitalize day}}</h4></div>
+                                    <div class="col-md-4"><label>Opening <button type="button" data-day="{{day}}" data-type="open" class="btn btn-danger btn-xs clear-time">x</button></label><input type="text" value="{{formatTime openHours}}" class="form-control timepicker" name="{{day}}OpenHours" id="{{day}}-open-hours"></div>
+                                    <div class="col-md-4"><label>Closing <button type="button" data-day="{{day}}" data-type="close" class="btn btn-danger btn-xs clear-time">x</button></label><input type="text"  value="{{formatTime closeHours}}" class="form-control timepicker" name="{{day}}CloseHours" id="{{day}}-close-hours"></div>
+                                    <br>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Auto Respond Message</h4>
+                                <textarea name="message" id="message" cols="30" rows="10" class="form-control">{{message}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-default cance-autorespond" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

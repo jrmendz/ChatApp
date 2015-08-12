@@ -1,0 +1,167 @@
+<template name="tasks">
+    <div id="tasks" class="w-clearfix central">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+<!--                    <input type="checkbox" class="update-task" {{isDone task.is_done}}> -->
+                    {{task.task_name}}
+<!--                    <button class="btn btn-default pull-right favorite"><h5 class="glyphicon glyphicon-star"></h5></button>-->
+                </h2>
+            </div>
+            <div class="panel-body" style="overflow-y:auto !important; height: 640px">
+                <div class="form-group">
+                    <div class='input-group date' id='due-date'>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        <input type='text' class="form-control due-date-input" placeholder="Add Due Date"/>
+                        <a href="#" class="input-group-addon clear-due-date">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <div class='input-group date' id='remind-date'>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                        <input type='text' class="form-control remind-date-input" placeholder="Remind Me"/>
+                        <a href="#" class="input-group-addon clear-remind-date">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                   {{#each addIndexKey task.sub_tasks}}
+                    <div class='input-group'>
+                        <span class="input-group-addon">
+                            <input type="checkbox" data-subtaskidx="{{indexKey}}" class="update-subtask" {{isDone value.is_done}}>
+                        </span>
+                        <input type='text' class="form-control {{lineThrough value.is_done}}" value="{{value.name}}" readonly/>
+                        <a href="#" class="input-group-addon remove-subtask" data-subtaskidx="{{indexKey}}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    {{/each}}
+                    <div class='input-group'>
+                        <a href="#" class="input-group-addon add-subtask">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                        <input type='text' class="form-control subtask-input" placeholder="Add a subtask"/>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <textarea placeholder="Add a note" class="form-control custom-control note" rows="3" style="resize:none">{{task.note}}</textarea>
+                </div>
+                <hr>
+                <ul class="media-list">
+                 {{#each files}}
+                  <li class="list-group-item">
+                    <div class="media-left">
+                      <a href="#">
+                        <img class="media-object" src="http://placehold.it/30x30" alt="...">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h5 class="media-heading">
+                          {{getUsername user_id}}
+                          <small>{{timeFromNow timestamp}}</small>
+                          <a href="#" class="pull-right remove-file" data-fileid="{{_id}}"><span class="glyphicon glyphicon-remove"></span></a>
+                      </h5>
+                      {{#if isImage file_name}} 
+                          <a href="#"  class="preview preview-img" data-preview="{{file_name}}"><small>{{file_name}}</small></a>
+                      {{else}}
+                          {{#if isVideo file_name}} 
+                              <a href="#"  class="preview preview-video" data-preview="{{file_name}}" data-type="{{videoType file_name}}"><small>{{file_name}}</small></a>
+                          {{else}}
+                              {{#if isAudio file_name}}
+                                  <a href="#"  class="preview play-audio" data-preview="{{file_name}}"><small>{{file_name}}</small></a>&nbsp;&nbsp;
+                                    <audio controls>
+                                        <source src="/files/{{file_name}}" type="{{audioType file_name}}">
+                                        Your browser does not support the audio element.
+                                    </audio> 
+                              {{else}}
+                                  <a href="/files/{{file_name}}" target="_blank" class="preview download-file"><small>{{file_name}}</small></a>
+                              {{/if}}
+                          {{/if}}
+                      {{/if}}
+                    </div>
+                  </li>
+                  {{/each}}
+                </ul>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <input class="btn btn-primary pull-left" type="file" id="attachment" name="attachment"> 
+                        <div class="pull-right">
+                            <h4>
+                                <a href="#" class="screenshot"><span class="glyphicon glyphicon-picture"></span></a>
+                                <a href="#" class="record-audio"><span class="glyphicon glyphicon-volume-up"></span></a>&nbsp;&nbsp;
+                                <div class="panel panel-success pull-right recorder-div">
+                                    <span id="time" style="display:none;"><span id="sw_h">00</span>:
+                                        <span id="sw_m">00</span>:
+                                        <span id="sw_s">00</span>&nbsp;
+                                        <span id="status"></span>
+                                    </span>
+                                    <button type="button" class="btn btn-default start" id="record"><span class="glyphicon glyphicon-record" onclick="check_timer()"></span></button>
+                                    <button type="button" class="btn btn-default" id="stop"><span class="glyphicon glyphicon-stop"></span></button>
+                                    <button type="button" class="btn btn-default" id="reset"><span class="glyphicon glyphicon-refresh"></span></button>
+                                </div>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <ul class="media-list">
+                    {{#each comments}}
+                  <li class="list-group-item">
+                    <div class="media-left">
+                      <a href="#">
+                        <img class="media-object" src="http://placehold.it/30x30" alt="...">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h5 class="media-heading">
+                          {{getUsername user_id}}
+                          <small>{{timeFromNow timestamp}}</small>
+                          <a href="#" class="pull-right remove-comment" data-commentid="{{_id}}"><span class="glyphicon glyphicon-remove"></span></a>
+                      </h5>
+                      <small>{{comment}}</small>
+                    </div>
+                  </li>
+                  {{/each}}
+                </ul>
+               <div class='input-group'>
+                    <a href="#" class="input-group-addon add-comment">
+                        <span class="glyphicon glyphicon-play-circle"></span>
+                    </a>
+                    <input type='text' class="form-control comment-input" placeholder="Add a comment..."/>
+                </div><br>
+            </div>
+            <div class="panel-footer text-center" style="padding-bottom: 25px;">
+                <button type="button" class="btn btn-default pull-left">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+                <small>Created a few seconds ago by User</small>
+                <button type="button" class="btn btn-default pull-right">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title"></h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="#" style="max-width: 500px;display: none;"/>
+                    <video width="500" controls style="display: none;">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

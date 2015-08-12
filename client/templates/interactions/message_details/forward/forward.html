@@ -1,0 +1,87 @@
+<template name="forwardMessage">
+    <div class="modal fade" id="forwardMessageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document" style="height: 100%; width: 70%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Forwarded Messages</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>
+                                <span class="glyphicon glyphicon-list-alt"></span> 
+                                History 
+                            </h3>
+                            <div class="list-group">
+                                {{#each forwardedHistory}}
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">{{number}} {{email}} <small class="pull-right">{{timeFromNow createdAt}}</small></h4>
+                                        <p class="list-group-item-text">{{message}}</p>
+                                        <br style="clear:both">
+                                    </a>
+<!--
+                                    <div class="list-group-item">
+                                        <p>{{message}} | {{recipient}} | {{createdBy}} | {{createdAt}} | {{employeeId}} | {{number}} | {{email}}</p>
+-->
+<!--
+                                        <h5 class="text-center">
+                                            {{value.note}}
+                                            <button class="btn btn-primary pull-right view-note" 
+                                                data-id="{{_id}}"
+                                                data-createdby="{{value.createdBy}}"
+                                                data-createdat="{{value.createdAt}}"
+                                                data-deleted="{{value.deleted}}"
+                                                data-deletedby="{{value.deletedBy}}"
+                                                data-deletedat="{{value.deletedAt}}">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </button>
+                                            <button style="display: {{isEqual value.deleted '1' 'none' 'block'}}" class="btn btn-danger pull-right remove-note" data-idx="{{indexKey}}" data-idtimestamp="{{value.interactionId}}{{value.createdAt}}"><span class="glyphicon glyphicon-remove"></span></button>
+                                        </h5>
+-->
+<!--                                    </div>-->
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Forward Message</h3>
+                            <form id="forwardMessageForm">
+                                <div class="form-group">
+                                    <label>Your Message</label>
+                                    <input class="form-control" name="yourMessage" id="yourMessage"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Message To Forward</label>
+                                    <textarea id="message" class="form-control" cols="30" rows="10" disabled>{{messageToForward}}</textarea>
+                                </div>
+                                <hr style="clear:both">
+                                <div class="form-group">
+                                    <label>Choose from address book</label>
+                                    <select name="employee" class="employees-list form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true" style="width: 100% !important">
+                                        <option value="">Choose an employee</option>
+                                        {{#each employees}}
+                                            <option value="{{_id}}" data-number="{{number}}" data-email="{{email}}">{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button type="button" class="btn btn-primary btn-xs send-mobile">Send to mobile</button>
+                                    <button type="button" class="btn btn-primary btn-xs send-email">Send to email</button>
+                                    <button type="button" class="btn btn-primary btn-xs send-both">Send to both</button>
+                                </div>
+                                <hr style="clear:both">
+                                <div class="form-group">
+                                    <label><small>or</small> Enter email address/mobile number</label>
+                                    <input class="form-control" name="manualRecipient" id="manualRecipient"/>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button type="button" class="btn btn-primary btn-xs send">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

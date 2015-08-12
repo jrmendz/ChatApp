@@ -1,0 +1,52 @@
+<template name="defaults">
+    <div class="modal fade" id="defaultsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title">Default Settings</h4>
+                </div>
+                 <form id="defaultsForm">
+                    <div class="modal-body text-center">
+                        <div class="form-group">
+                            <label>Business Country</label>
+                            <select class="form-control" id="businessCountry" name="businessCountry">
+                                {{#each countries}}
+                                <option value="{{code}}" {{isEqual defaults.businessCountry code 'selected' ':none'}}>{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Business Language</label>
+                            <select class="form-control" id="businessLanguage" name="businessLanguage">
+                                {{#each languages}}
+                                <option value="{{code}}" {{isEqual defaults.businessLanguage code 'selected' ':none'}}>{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Default country when adding contacts</label>
+                            <select class="form-control" id="contactCountry" name="contactCountry">
+                                {{#each countries}}
+                                <option value="{{code}}" {{isEqual defaults.contactCountry code 'selected' ':none'}}>{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Default language when adding contacts</label>
+                            <select class="form-control" id="contactLanguage" name="contactLanguage">
+                                {{#each languages}}
+                                <option value="{{code}}" {{isEqual defaults.contactLanguage code 'selected' ':none'}}>{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-default cancel-defaults" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

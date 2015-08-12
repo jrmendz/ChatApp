@@ -1,0 +1,65 @@
+<template name="eventScheduler">
+    <div class="modal fade" id="eventSchedulerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document" style="height: 100%; width: 70%">
+            <div class="modal-content" style="height: 130%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Event Scheduler</h4>
+                </div>
+                <div class="modal-body">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="eventFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{mode}} Event</h4>
+                </div>
+                <form id="eventSchedulerForm">
+                    <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-md-6">
+                                    <label for="name">Start Date</label>
+                                    <input type="text" class="form-control start datepicker" name="startDate" id="startDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="name">Start Time</label>
+                                    <input type="text" class="form-control start timepicker" name="startTime" id="startTime">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-6">
+                                    <label for="name">End Date</label>
+                                    <input type="text" class="form-control end datepicker" name="endDate" id="endDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="name">End Time</label>
+                                    <input type="text" class="form-control end timepicker" name="endTime" id="endTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><input type="checkbox" id="urgent" name="urgent" value="1"> Urgent</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Title</label>
+                                <input type="text" class="form-control title" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Description</label>
+                                <input type="text" class="form-control description" name="description">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                       {{#if editMode}} <button type="button" class="btn btn-danger pull-left remove-event">Delete Event</button> {{/if}}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

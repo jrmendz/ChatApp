@@ -1,0 +1,114 @@
+<template name="messageDetails">
+<div class="w-clearfix details">
+	<div class="w-clearfix reply-menu">
+		<div id="consumer-header" class="col-md-12" style="display: none">
+			<h4>
+				{{currentConsumerInfo.name}}
+				{{#if currentConsumerInfo.company}}
+				<small style="color:#505B72;border: 1px solid #505B72;padding: 2px 3px 2px;">{{currentConsumerInfo.company}}</small>
+				{{/if}}
+				{{#unless isEqual currentConsumerInfo.type 'invite'}}
+	                {{>attachment}}
+	            {{/unless}}
+			</h4>
+			<h5 style="padding: 0px; margin: -8px 0px;">
+				<label>
+					 <small><i class="fa fa-mobile"></i>&nbsp;{{currentConsumerInfo.number}}</small>
+				</label>
+			</h5>
+		</div>
+	</div>
+	<div id="reply-form" class="w-clearfix reply">
+		<form class="w-clearfix rmsg-form-wrap" id="text-form" name="text-form" onsubmit="return false;" data-name="Text Form">
+			<div class="w-form w-clearfix rmsg-form-box">
+				<div class="input-group">
+					<input id="message" type="text" class="form-control" name="message" maxlength="82" placeholder="Enter message...">
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-primary send-message"><i class="fa fa-paper-plane"></i>&nbsp; Send</button>
+					</span>
+				</div>
+				<div class="w-form-done">
+					<p>Thank you! Your submission has been received!</p>
+				</div>
+				<div class="w-form-fail">
+					<p>Oops! Something went wrong while submitting the form</p>
+				</div>
+			</div>
+			<div class="w-clearfix rmsg-info-box">
+				<div class="w-clearfix rm-status-wrap" style="width:100%;">
+					<p class="rms-delivery message-sent" style="display: none">Message Sent</p>
+					<div class="w-clearfix rms-info">
+						<p class="rmn-pchar">Message character count:&nbsp;</p>
+						<p class="rmn-char-count"><strong>82</strong></p>
+						<p class="rmn-pnummsg">Separate messages will be sent</p>
+						<p class="rmn-nummsg-count"><strong><em>2</em></strong></p>
+					</div>
+				</div>
+				<div class="w-clearfix rm-notify-wrap">
+					<div class="w-clearfix rmn-info">
+						<p class="rmn-disclaimer">*note: short texts (160 char or less)&nbsp;are much more receptive. Back to back texts or long ones gain much less response.</p>
+					</div>
+				</div>
+			</div>
+		{{#if sessionAttachment}}
+			<div class="col-md-12"><small><strong>Attachment:</strong> {{sessionAttachment}}</small>
+				<button type="button" class="btn btn-danger btn-xs remove-attachment">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+		{{/if}}
+		</form>
+	</div>
+	<div class="w-clearfix reply" style="height: 500px;overflow: auto;">
+		<div id="timeline" class="timeline-wrapper">
+			<!--<div class="timeline-date">Sunday, July 05, 2015</div>-->
+			{{#each interactions}}
+			<div class="panel panel-post-item commented {{messageClass fromAgent}}">
+				<div class="panel-heading">
+					<div class="media">
+						<div class="media-left">
+							<a href="#">
+								<img alt="" src="/images/person.PNG" class="media-object img-circle">
+							</a>
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading">{{userNumber fromAgent consumerNumber isAutomated}}</h4>
+							<p class="media-usermeta">
+								<span class="media-time">12:00 AM</span>
+								<i class="fa fa-clock-o"></i>&nbsp;<a href="">{{timeFromNow timestamp}}</a>
+							</p>
+						</div>
+					</div>
+                    {{#if isEqual fromAgent '0'}}
+					<ul class="panel-options">
+						<li>
+							<button class="btn btn-default btn-xs forward-message pull-right" data-id="{{_id}}" data-message="{{message}}" data-name="{{userNumber fromAgent consumerNumber isAutomated}}" data-timestamp="{{timestamp}}" data-toggle="modal" data-target="#forwardMessageModal"><span class="glyphicon glyphicon-send"></span></button>
+						</li>
+						<li>
+							<button class="btn btn-default btn-xs note-message pull-right" data-id="{{_id}}" data-toggle="modal" data-target="#commonNotesModal"><span class="glyphicon glyphicon-list-alt"></span></button>
+						</li>
+
+					</ul>
+					{{/if}}
+				</div>
+                <div class="panel-body">
+					{{#if hasAttachment attachment}}
+					<a href="#" class="btn btn-primary btn-xs preview-attachment pull-right" data-file="{{attachment.fileName}}" data-type="{{fileType attachment.fileName}}"><span class="glyphicon glyphicon-open-file"></span></a>
+					{{/if}}
+					{{message}}
+                </div>
+			</div>
+        	{{/each}}
+		</div>
+	</div>
+	<div class="w-clearfix reply-msgs-box">
+		<div class="reply-msg-list-wrap">
+			<div class="w-clearfix reply-msg-incoming-box">
+				<div class="w-clearfix rep-msg-incoming-wrap">
+					<div class="reply-msg-incoming-arrow"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</template>

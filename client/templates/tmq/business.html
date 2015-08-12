@@ -1,0 +1,115 @@
+<template name="tmqBusinesses">
+    <div class="row" style="padding: 15px">
+        <div class="col-md-3">
+			<div class="panel panel-success">
+				<ul class="panel-options">
+					<li><a href="#" class="add-business"><i class="fa fa-plus"></i></a></li>
+				</ul>
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<i class="fa fa-briefcase"></i>&nbsp;Businesses
+					</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="media-list user-list">
+	                {{#each businessesList}}
+						<li class="media">
+							<div class="media-body">
+								<h4 class="media-heading">
+								{{name}}
+								</h4>
+								<small>
+									<a href="#" class="edit-business" data-id="{{_id}}"><i class="fa fa-edit"></i>&nbsp;edit</a>&emsp;
+									<a href="#" class="suspend-business" data-id="{{_id}}"><i class="fa fa-ban"></i>&nbsp;suspend</a>
+								</small>
+							</div>
+						</li>
+                	{{/each}}
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-9">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					{{mode}} Business
+					</h4>
+				</div>
+				<div class="panel-body">
+		            <form id="tmqBusinessForm">
+		                <div class="row">
+		                    <div class="col-md-4">
+		                        <div class="form-group">
+		                            <label for="name">Name</label>
+		                            <input type="text" class="form-control name" name="name">
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="name">Email Address</label>
+		                            <input type="text" class="form-control email" name="email">
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="name">Address</label>
+		                            <input type="text" class="form-control address" name="address">
+		                        </div>
+		                        <div class="form-group row">
+		                            <div class="col-md-6">
+		                                <label for="name">City</label>
+		                                <input type="text" class="form-control city" name="city">
+		                            </div>
+		                            <div class="col-md-6">
+		                                <label for="name">State</label>
+		                                <input type="text" class="form-control state" name="state">
+		                            </div>
+		                        </div>
+		                        <div class="form-group row">
+		                            <div class="col-md-6">
+		                                <label for="name">Country</label>
+		                                <input type="text" class="form-control country" name="country">
+		                            </div>
+		                            <div class="col-md-6">
+		                                <label for="name">Zip Code</label>
+		                                <input type="text" class="form-control zip" name="zip">
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-md-4">
+		                        <div class="form-group">
+		                            <label for="name">Numbers <button type="button" class="btn btn-success btn-xs add-number"><span class="glyphicon glyphicon-plus"></span></button></label>
+		                            {{#each addIndexKey businessNumbers}}
+		                            <div class="row" style="padding-bottom: 5px">
+		                                <div class="col-md-5"><input {{disabled value.type value.number}} type="text" class="form-control type-input" name="type{{indexKey}}" value="{{value.type}}" data-idx={{indexKey}} placeholder="Type"></div>
+		                                <div class="col-md-5"><input {{disabled value.type value.number}} type="text" class="form-control number-input" name="number{{indexKey}}" value="{{value.number}}" data-idx={{indexKey}} placeholder="Number"></div>
+		                                {{#if addMode}}
+		                                    {{#if showRemove indexKey}}<div class="col-md-2"><button type="button" class="btn btn-danger btn-xs remove-number" data-idx={{indexKey}}><span class="glyphicon glyphicon-remove"></span></button></div>{{/if}}
+		                                {{else}}
+		                                   {{#if addNumber value.type value.number}}
+		                                   <div class="col-md-2"><button type="button" class="btn btn-danger btn-xs remove-number" data-idx={{indexKey}}><span class="glyphicon glyphicon-remove"></span></button></div>
+		                                   {{else}}
+		                                    <div class="col-md-2"><button {{isRetired value.retired}} style="{{grayBtn value.retired}}" type="button" class="btn btn-danger btn-xs retire-number" data-idx={{indexKey}}><span class="glyphicon glyphicon-off"></span></button></div>
+		                                    {{/if}}
+		                                {{/if}}
+		                            </div>
+		                            {{/each}}
+		                        </div>
+		                    </div>
+		                    <div class="col-md-3">
+		                        {{>businessAgents}}
+		                    </div>
+		                </div>
+		                <div class="form-group pull-right">
+		                    <br><button class="btn btn-primary btn-lg" type="submit">Save</button>
+		                    <button class="btn btn-default btn-lg business-cancel" type="button">Cancel</button>
+		                </div>
+		            </form>
+				</div>
+			</div>
+        </div>
+    </div>
+	<script>
+	$(function(){
+		$('.nav').removeClass('active');
+		$('.nav.bs').addClass('active');
+	});
+	</script>
+</template>

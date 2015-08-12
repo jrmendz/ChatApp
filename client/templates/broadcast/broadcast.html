@@ -1,0 +1,124 @@
+<template name="broadcast">
+    <div class="w-clearfix central">
+        <div class="row" style="padding: 15px">
+            <div class="col-md-4">
+				<div class="panel panel-primary list-announcement">
+					<ul class="panel-options">
+						<li><a href="#" class="send-broadcast"><i class="fa fa-send"></i></a></li>
+						<li><a href="#" class="add-group"><i class="fa fa-plus"></i></a></li>
+					</ul>
+					<div class="panel-heading">
+						<h4 class="panel-title"><i class="fa fa-bullhorn"></i>&nbsp;Consumer Groups</h4>
+					</div>
+					<div class="panel-body">
+						<ul class="list-unstyled mb20">
+                    	{{#each addIndexKey groupsList}}
+							<li>
+								<a href="">{{value.name}}</a>
+								<div class="btn-group pull-right ">
+	                                <button class="btn btn-xs btn-danger remove-group" data-idx="{{indexKey}}">
+									&nbsp;<i class="fa fa-trash"></i>&nbsp;
+									</button>
+	                                <button class="btn btn-xs btn-warning edit-group" data-idx="{{indexKey}}">
+									&nbsp;<i class="fa fa-pencil"></i>&nbsp;
+									</button>
+								</div>
+							</li>
+                    	{{/each}}
+						</ul>
+					</div>
+				</div>
+            </div>
+            <div class="col-md-8">
+				<div class="panel panel-inverse">
+					<div class="panel-heading">
+						<h4 class="panel-title">{{{broadCastHeading}}}</h4>
+					</div>
+					<div class="panel-body">
+		                <form id="sendBroadcastForm">
+		                    <div class="row">
+		                        <div class="col-md-6">
+		<!--
+		                            <div class="form-group">
+		                                <label for="name">Business Number</label>
+		                                <select name="businessNumber" id="businessNumber" class="form-control">
+		                                  <option value="">Please select...</option>
+		                                  {{#each businessNumbers}}
+		                                      <option value="{{number}}">{{type}} - {{number}}</option>
+		                                  {{/each}}
+		                              </select>
+		                            </div>
+		-->
+		                            <div class="form-group">
+		                                <label for="name">Message</label>
+		                                <textarea class="form-control" name="message" id="message"></textarea>
+		                            </div>
+		                            <button type="submit" class="btn btn-primary">Send</button>
+		                            <button type="button" class="btn btn-default broadcast-cancel">Cancel</button>
+		                        </div>
+		                        <div class="col-md-6">
+		<!--
+		                            <div class="form-group">
+		                                <label for="name">Broadcast To</label>
+		                                <select name="groups-list" class="groups-list form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true" multiple="multiple" style="width: 100%">
+		                                    {{#each groups}}
+		                                        <option value="{{_id}}">{{name}}</option>
+		                                    {{/each}}
+		                                </select>
+		                            </div>
+		-->
+		                            <label>Broadcast To</label>
+		                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		                                {{#each addIndexKey groupsList}}
+		                                <div class="panel panel-default">
+		                                    <div class="panel-heading" role="tab" id="{{indexKey}}-heading">
+		                                        <h4 class="panel-title">
+		                                            <a role="button" data-parentid="{{indexKey}}" data-toggle="collapse" data-parent="#accordion" href="#{{indexKey}}-body" aria-expanded="true" aria-controls="{{indexKey}}-body">
+													{{value.name}}
+		                                            </a>
+		                                        </h4>
+		                                    </div>
+		                                    <div id="{{indexKey}}-body" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{indexKey}}-heading">
+		                                        <div class="panel-body">
+													<label class="ckbox ckbox-info">
+		                                            	<input type="checkbox" name="groups[]" data-id="{{indexKey}}" class="consumer-group"/>
+														<span>Select All</span>
+													</label>
+		                                            {{#each addIndexKey value.consumers}}
+		                                                <div class="checkbox">
+															<label class="ckbox">
+																<input type="checkbox" class="consumer" name="consumers[]" value="{{value}}" data-number="{{value}}" data-groupid="{{../indexKey}}"/>
+																<span>{{consumerDetails value}}</span>
+															</label>
+		                                                </div>
+		                                            {{/each}}
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                {{/each}}
+		                            </div>
+		                        </div>
+		                    </div>
+		                </form>
+		                <form id="groupForm" style="display: none">
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" name="name" id="name">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Consumers</label>
+		                        <select name="consumers-list" class="consumers-list form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true" multiple="multiple" style="width: 100%">
+		                            {{#each consumersList}}
+		                                <option value="{{mobileNumber}}">{{firstName}} {{lastName}} - {{mobileNumber}}</option>
+		                            {{/each}}
+		                        </select>
+		                    </div>
+		                    <button type="submit" class="btn btn-primary">Save</button>
+		                    <button type="button" class="btn btn-default broadcast-cancel">Cancel</button>
+		                </form>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</template>

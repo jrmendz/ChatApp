@@ -1,0 +1,129 @@
+<template name="consumerInfo">
+    <div class="modal fade" id="consumerInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Consumer Info</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+                        <li><a data-toggle="tab" href="#more-details">More Details</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="profile" class="tab-pane fade in active">
+                            {{>infoProfile consumer=consumer}}
+                        </div>
+                        <div id="more-details" class="tab-pane fade">
+                            {{>infoMore consumer=consumer}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="infoProfile">
+    <form action="" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <label for="mobile-no">Mobile number</label>
+                    <input disabled class="form-control" value="{{consumer.mobile_number}}" type="text"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <label for="fname">First name</label>
+                    <input disabled class="form-control" value="{{consumer.identity.first}}" type="text"/>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lname">Last name</label>
+                    <input disabled class="form-control" value="{{consumer.identity.last}}" type="text"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-7">
+                    <label for="company">Company</label>
+                    <input disabled class="form-control" value="{{consumer.identity.company}}" type="text"/>
+                </div>
+                <div class="col-sm-5">
+                    <label for="company">Account No.</label>
+                    <input disabled class="form-control" value="{{consumer.identity.account_no}}" type="text"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-8">
+                    <label for="company">Address</label>
+                    <input disabled class="form-control" value="{{consumer.identity.address}}" type="text"/>
+                </div>
+                <div class="col-sm-4">
+                    <label>Language</label>
+                    <input disabled  type="text" class="form-control"  value="{{consumer.language}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <label>Country</label>
+                    <input disabled class="form-control" value="{{consumer.country}}" type="text"/>
+                </div>
+                <div class="col-sm-3">
+                    <label for="company">State</label>
+                    <input disabled class="form-control" value="{{consumer.identity.state}}" type="text"/>
+                </div>
+                <div class="col-sm-3">
+                    <label for="company">City</label>
+                    <input disabled class="form-control"  value="{{consumer.identity.city}}" type="text" style="font-weight: bold"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <label for="company">Email</label>
+                    <input disabled class="form-control" value="{{consumer.identity.email}}" type="text"/>
+                </div>
+                <div class="col-sm-6">
+                    <label for="company">Link</label>
+                    <input disabled class="form-control" value="{{consumer.identity.link}}" type="text"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>
+
+
+<template name="infoMore">
+    <form action="" class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-6">
+                {{#each consumer.others.col1}}
+                    <div class="form-group col-sm-12">
+                        <label>{{label}}</label>
+                        <input disabled class="form-control" value="{{value}}" type="text"/>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="col-sm-6">
+                {{#each consumer.others.col2}}
+                    <div class="form-group col-sm-12">
+                        <label>{{label}}</label>
+                        <input disabled class="form-control" value="{{value}}" type="text"/>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </form>
+</template>

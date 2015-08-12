@@ -1,0 +1,108 @@
+<template name="layout">
+  <div class="actions"></div>
+  <div class="w-clearfix seat-user">
+    <div class="tmq-box">
+      <div class="w-clearfix tmq-corp-wrap">
+        <div class="tmqc-name-wrap">
+          <div class="tmqc-app-name">txtConsole</div>
+        </div>
+        <div class="w-clearfix tmqc-logo-wrap"><img class="tmqc-logo" src="images/txtmeQuick_Q.png" width="33%" height="51%">
+        </div>
+      </div>
+      <div class="w-clearfix tmq-corptag-wrap">
+        <div class="tmqc-powerby">powered by txtmeQuick</div>
+      </div>
+      <div class="w-clearfix tmq-social-wrap">
+        <div class="w-clearfix tmq-social">
+          <div class="tmq-social-li fa fa-facebook-square" style="font-size: 240%; line-height: 120%"></div>
+        </div>
+        <div class="w-clearfix tmq-social">
+          <div class="tmq-social-li fa fa-twitter-square" style="font-size: 240%; line-height: 120%"></div>
+        </div>
+        <div class="w-clearfix tmq-social">
+          <div class="tmq-social-li fa fa-linkedin-square"></div>
+        </div>
+        <div class="w-clearfix tmq-social">
+          <div class="tmq-social-li fa fa-google-plus-square" style="font-size: 240%; line-height: 120%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="w-clearfix su-kudos-box">
+      <div class="su-wreath">
+      <img class="su-photo" src="images/buyer-agent.jpg" width="40%">
+          <div class="text-center"><small>{{currentUser.username}}</small></div>
+      </div>
+      <div class="w-clearfix su-acks-wrap">
+        <div class="su-badge"><strong>Club 500+</strong>
+        </div>
+        <p class="su-comments">“ Great job Ann!!!
+          <br>Way to go this last summer.&nbsp;&nbsp;I&nbsp;really ... ”</p>
+      </div>
+    </div>
+    <div class="w-clearfix su-buzz-box">
+      <div class="su-buzz-badge"></div>
+      <div class="w-clearfix su-buzz-info-wrap">
+        <div class="w-clearfix su-buzz-points"><strong class="su-buzz-point">584 BuzzPoints</strong>
+        </div>
+        <div class="su-buzz-ranking">Ahead of:&nbsp;&nbsp;Julian Cortez</div>
+        <div class="su-buzz-status">Only need 24 points to move up one!!</div>
+      </div>
+    </div>
+    <div class="su-corp-box">
+        <div class="w-clearfix su-buzz-info-wrap">
+            <strong><h3>{{currentBusinessName}}</h3></strong>
+            <h5>{{formatNumber currentBusinessNumber}}<br><small>{{currentTime}}</small></h5>
+        </div>
+    </div>
+  </div>
+  
+  {{#if currentUser}}
+      {{>yield region="menu"}}
+      <div class="status"></div>
+      {{>yield}}
+  {{/if}}
+  <div class="modal fade" id="dropzoneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Attach {{attachType}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{> dropzone url='/upload' id='dropzoneDiv' maxFiles=1 acceptedFiles=''}}
+<!--
+                    {{#if attachImage}} {{> dropzone url='/upload' id='dropzoneDiv' maxFiles=1 acceptedFiles='image/*'}} {{/if}}
+                    {{#if attachVideo}} {{> dropzone url='/upload' id='dropzoneDiv' maxFiles=1 acceptedFiles='video/*'}} {{/if}}
+                    {{#if attachAudio}} {{> dropzone url='/upload' id='dropzoneDiv' maxFiles=1 acceptedFiles='audio/*'}} {{/if}}
+                    {{#if attachOther}} {{> dropzone url='/upload' id='dropzoneDiv' maxFiles=1 acceptedFiles='*'}} {{/if}}
+-->
+                </div>
+            </div>
+        </div>
+    </div>
+	{{> rightdock}}
+</template>
+
+<template name="menu">
+    <div class="context">
+        <span class="w-inline-block context-menui">
+            <a href="{{pathFor 'interactions'}}"><img class="cm-image" src="/images/text_01.png" alt="Messaging" width="50%"></a>
+            <a href="{{pathFor 'consumers'}}"><img class="cm-image" src="/images/icon_58621w.png" width="50%"></a>
+            <a href="{{pathFor 'search'}}"><img class="cm-image" src="/images/search_w1.png" width="50%"></a>
+            <a href="{{pathFor 'broadcast'}}"><img class="cm-image" src="/images/icon_47171w.png" width="50%"></a>
+            <a href="{{pathFor 'poundcodeSettings'}}"><img class="cm-image" src="/images/icon_67739w.png" width="50%"></a>
+            <a href=""><img class="cm-image" src="/images/icon_58211w2.png" width="50%"></a>
+            <a href="{{pathFor 'settings'}}"><img class="cm-image" src="/images/settings_w2.png" width="50%"></a>
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button id="logout" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-off"></span></button>
+        </span>
+    </div>
+</template>
+
+<template name="loading">
+    <div id="modal"></div>
+</template>
+
+<template name="home">
+    <h1>Home</h1>
+</template>

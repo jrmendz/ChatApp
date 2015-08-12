@@ -1,0 +1,82 @@
+<template name="importHandler">
+	<fieldset>
+	    <legend>{{init}}{{importMsg}}</legend>
+	{{#if equals importState 0}}
+   		{{> uploadInput}}
+	{{/if}}
+	{{#if equals importState 1}}
+		{{> loaderbar}}
+	{{/if}}
+	{{#if equals importState 2}}
+   		{{> mapping}}
+	{{/if}}
+	{{#if equals importState 3}}
+   		{{> result}}
+	{{/if}}
+	</fieldset>
+</template>
+<template name="uploadInput">
+    <label for="file-upload-text">Upload CSV file:</label>
+	<div class="form-group">
+        <!--<div class="col-sm-12">
+            <div class="col-sm-8">
+				<input type="file" name="file-upload" class="form-control file-upload" />
+				<small class="text-error upload-msg hidden"></small>
+			</div>
+            <div class="col-sm-4">
+				<input type="button" value="Upload" class="btn btn-primary start-upload" />
+			</div>
+		</div>-->
+		{{> dropzone url='upload' id='dropzoneDiv' maxFiles=1 acceptedFiles='.csv'}}
+		{{#if isUploaded}}
+		<br/>
+		<input class="btn btn-primary next-step right" type="button" value="Next" />
+		{{/if}}
+	</div>
+	<br/>
+	<div>
+	</div>
+</template>
+<template name="loaderbar">
+	<!--<label>Uploading '{{file}}'...</label>
+	{{> FS.UploadProgressBar bootstrap=true class='progress-bar-success progress-bar-striped active' showPercent=true}}-->
+</template>
+<template name="mapping">
+	<ul>
+	{{#each fields}}
+		<li class="field-list">
+			<strong class="field">{{name}}</strong>&emsp;->&emsp;
+			<select class="selection form-control" id="{{_id}}" index="{{index}}" prev="0">
+				{{#each options}}
+				<optgroup label="{{name}}">
+					{{#if ifsubmenu}}
+						{{#each ifsubmenu}}
+					<option value="{{value}}">{{name}}</option>
+						{{/each}}
+					{{/if}}
+		    	</optgroup>
+				{{/each}}
+		    </select>
+		</li>
+	{{/each}}
+	</ul>
+	<small class="text-error upload-msg hidden"></small>
+	<input type="button" class="btn btn-primary next-step right" value="Start Import" />
+</template>
+<template name="result">
+	<label>Importing...</label>
+	<div class="progress progress-striped active">
+	  <div class="bar" style="width: {{progress}}%;"></div>
+	</div>
+	<label>Logs:</label>
+	<div class="hero-unit">
+	{{#if equals progress 100}}
+		{{#each logs}}
+			<p>{{log}}</p><br/>
+		{{/each}}
+	{{/if}}
+	</div>
+	{{#if equals progress 100}}
+	<input class="btn btn-primary next-step right" type="button" value="Finish" />
+	{{/if}}
+</template>

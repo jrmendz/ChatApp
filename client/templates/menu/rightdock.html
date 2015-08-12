@@ -1,0 +1,30 @@
+<template name="rightdock">
+	<div class="dock-fixed">
+		<div class="dock-fixed sub-dock pull-left">
+			<ul>
+			{{#each subMenu}}
+				{{#if divider}}
+				<li class="divider">&nbsp;</li>
+				{{else}}
+				<li>
+					<a class="{{class}}" href="{{href}}" title="{{title}}"></a>
+				</li>
+				{{/if}}
+			{{/each}}
+			</ul>
+		</div>
+		<div class="dock-fixed main-dock pull-right">
+			<ul>
+			{{#each mainMenu}}
+				{{#if divider}}
+				<li class="divider">&nbsp;</li>
+				{{else}}
+				<li>
+					<a class="{{class}}" href="{{href}}" title="{{title}}"></a>
+				</li>
+				{{/if}}
+			{{/each}}
+			</ul>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,102 @@
+<template name="tmqStaffs">
+    <div class="row" style="padding: 15px">
+        <div class="col-md-3">
+			<div class="panel panel-success">
+				<ul class="panel-options">
+					<li><a href="#" class="add-staff"><i class="fa fa-plus"></i></a></li>
+				</ul>
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					<i class="fa fa-user"></i>&nbsp;TMQ Staffs
+					</h4>
+				</div>
+				<div class="panel-body">
+					<ul class="media-list user-list">
+                	{{#each staffsList}}
+						<li class="media">
+							<div class="media-body">
+								<h4 class="media-heading">
+                            	{{profile.firstName}} {{profile.lastName}}
+								</h4>
+								<small>
+									<a href="#" class="edit-staff" data-id="{{_id}}"><i class="fa fa-edit"></i>&nbsp;edit</a>&emsp;
+									<a href="#" class="remove-staff" data-id="{{_id}}"><i class="fa fa-trash"></i>&nbsp;remove</a>
+								</small>
+							</div>
+						</li>
+                	{{/each}}
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-9">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+					{{mode}} Staff
+					</h4>
+				</div>
+				<div class="panel-body">
+		            <form id="tmqStaffForm">
+		                <div class="row">
+		                    <div class="col-md-6">
+		                        <label for="name">First Name</label>
+		                        <input type="text" class="form-control first-name" name="firstName">
+		                    </div>
+		                    <div class="col-md-6">
+		                        <label for="name">Last Name</label>
+		                        <input type="text" class="form-control last-name" name="lastName">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="name">Address</label>
+		                    <input type="text" class="form-control address" name="address">
+		                </div>
+		                <div class="row">
+		                    <div class="col-md-3">
+		                        <label for="name">City</label>
+		                        <input type="text" class="form-control city" name="city">
+		                    </div>
+		                    <div class="col-md-3">
+		                        <label for="name">State</label>
+		                        <input type="text" class="form-control state" name="state">
+		                    </div>
+		                    <div class="col-md-3">
+		                        <label for="name">Country</label>
+		                        <input type="text" class="form-control country" name="country">
+		                    </div>
+		                    <div class="col-md-3">
+		                        <label for="name">Zip Code</label>
+		                        <input type="text" class="form-control zip" name="zip">
+		                    </div>
+		                </div>
+		                <div class="row">
+		                    <div class="col-md-4">
+		                        <label for="name">Username</label>
+		                        <input type="text" class="form-control username" name="username">
+		                    </div>
+		                    <div class="col-md-4">
+		                        <label for="name">Email Address</label>
+		                        <input type="text" class="form-control email" name="email">
+		                    </div>
+		                    <div class="col-md-4">
+		                        <label for="name">Mobile Number</label>
+		                        <input type="text" class="form-control mobile" name="mobile">
+		                    </div>
+		                </div>
+		                <div class="form-group pull-right">
+		                    <br><button class="btn btn-primary btn-lg" type="submit">Save</button>
+		                    <button class="btn btn-default btn-lg staff-cancel" type="button">Cancel</button>
+		                </div>
+		            </form>
+				</div>
+        	</div>
+        </div>
+    </div>
+	<script>
+	$(function(){
+		$('.nav').removeClass('active');
+		$('.nav.st').addClass('active');
+	});
+	</script>
+</template>
